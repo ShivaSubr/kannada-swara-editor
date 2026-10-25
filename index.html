@@ -46,18 +46,34 @@ main{max-width:1500px}
 .lyrics-line:focus{outline:1px solid #4278bb;background:#f8fbff}
 .lyrics-line:empty:before{content:'Type lyrics here…';color:#a0a8b5;pointer-events:none}
 @media print{.lyrics-line{font-size:11px!important;line-height:1.3!important;margin:0 0 1.5mm!important;padding:0!important;outline:none!important;border:0!important;color:#111!important;break-inside:avoid}.lyrics-line:empty{display:none!important}}
-</style></head><body><main><h1>Carnatic Swara Editor · ಸ್ವರ ಸಂಪಾದಕ</h1><div class="credit">Created by Shiva Subramanya</div><div class="free-note">Free for anyone to use · ಎಲ್ಲರಿಗೂ ಉಚಿತವಾಗಿ ಬಳಸಲು ಲಭ್ಯ</div><div class="sub">Multilingual Carnatic Swara Editor · Sticky swara keypad · Aarohana / Avarohana · accurately positioned octave dots · deergha swaras · save and reopen projects</div>
-<div class="panel no-print" style="margin:12px 0"><label for="notationLanguage"><strong>Notation language / ಲಿಪಿ / எழுத்து / లిపి</strong></label> <select id="notationLanguage" style="padding:9px;border:1px solid #b7c5d6;border-radius:8px"><option value="kn">ಕನ್ನಡ · Kannada</option><option value="ta">தமிழ் · Tamil</option><option value="te">తెలుగు · Telugu</option><option value="en">English</option></select><span class="hint"> Switch scripts without changing the music. Lyrics and free text are not translated.</span></div><div class="work-layout"><section class="panel no-print swara-sidebar"><div class="label">Octave / ಸ್ಥಾಯಿ</div><div class="toolbar" id="octaves"><button data-o="low">ಕೆಳ ಸ್ಥಾಯಿ · dot below</button><button data-o="mid" class="active">ಮಧ್ಯ ಸ್ಥಾಯಿ</button><button data-o="high">ಮೇಲಿನ ಸ್ಥಾಯಿ · dot above</button></div><div class="label">Insert swara / ಸ್ವರ</div><div class="toolbar" id="notes"></div><div class="label">Deergha / duration — applies to the preceding swara</div><div class="toolbar"><button data-d=",">, +1</button><button data-d=";">; +2</button><button data-d=",,">,, +2</button><button id="custom">Custom…</button></div><div class="label">Voice typing / ಧ್ವನಿ ಟೈಪಿಂಗ್</div><div class="toolbar"><button type="button" id="voiceStart">🎤 Start voice typing</button><button type="button" id="voiceStop" disabled>■ Stop</button></div><div id="voiceStatus" class="hint" aria-live="polite">Speak: Sa Ri Ga Ma Pa Da Ni. Commands: upper octave, middle octave, lower octave, comma, semicolon, tala, double tala, new line.</div><p class="hint">Voice typing uses your browser’s speech recognition. Check recognized notes before saving. Microphone access and internet may be required.</p><div class="voice-review" style="border:1px solid #b7c5d6;border-radius:10px;padding:10px;margin:10px 0;background:#f8fbff">
-<label for="voiceLocale" style="display:block;margin-bottom:7px">Recognition accent: <select id="voiceLocale"><option value="en-IN">Indian English</option><option value="en-US">US English</option><option value="en-GB">UK English</option><option value="kn-IN">Kannada speech (experimental)</option><option value="ta-IN">Tamil speech (experimental)</option><option value="te-IN">Telugu speech (experimental)</option></select></label>
-<label for="voiceDraft" style="display:block;font-weight:bold">Recognized transcript — correct it before inserting</label>
-<textarea id="voiceDraft" rows="3" style="box-sizing:border-box;width:100%;font-size:15px;padding:8px" placeholder="Speak or type: sa ri ga ma pa | Correct any misheard words here"></textarea>
-<div style="margin-top:6px"><strong>Notation preview:</strong> <span id="voicePreview" style="overflow-wrap:anywhere"></span></div>
-<div id="voiceUnknown" class="hint" aria-live="polite"></div>
-<div class="toolbar" style="margin-top:8px"><button type="button" id="voiceApply">✓ Insert reviewed notes</button><button type="button" id="voiceClear">Clear transcript</button></div>
-<p class="hint">Say short groups (for example “sa ri ga ma”), pause, review, and insert. Unrecognized words are flagged instead of silently skipped. Dictation accuracy depends on your browser.</p>
-</div><div class="label">Lyrics / ಸಾಹಿತ್ಯ</div><div class="phonetic-tools"><label><input type="checkbox" id="phoneticOn" checked> <strong>English keyboard → Indian-script lyrics</strong></label><p class="hint">In a lyrics line, type Roman letters and press Space or Enter to convert the word. Use aa, ee, oo for long vowels; sh, ch, th, dh for consonants. Turn this off to type English lyrics.</p><button type="button" id="convertLyrics">Convert current lyrics line</button> <span id="phoneticStatus" class="hint" aria-live="polite"></span></div><div class="toolbar"><button type="button" id="insertLyrics">✍ Add lyrics below swaras</button></div><p class="hint">Place the cursor after a swara line, then click Add lyrics. Type Roman letters with the English keyboard and press Space to convert, or paste the words below the notes. Lyrics are preserved when switching notation languages and included in the compact PDF.</p><div class="label">Song sections / ವಿಭಾಗಗಳು</div><div class="toolbar"><button type="button" data-section="pallavi">ಪಲ್ಲವಿ · Pallavi</button><button type="button" data-section="anupallavi">ಅನುಪಲ್ಲವಿ · Anupallavi</button><button type="button" data-section="charana">ಚರಣ · Charana</button></div><div class="label">Underline / ರೇಖೆ</div><div class="toolbar"><button type="button" id="u1">Single underline</button><button type="button" id="u2">Double underline</button><button type="button" id="u0">Remove underline</button></div><div class="keyboard-tip"><b>Keyboard typing:</b> Click in the composition and type <b>S R G M P D N</b> (lowercase also works) to insert swara notation. Select lower/middle/upper octave on the left. Use <b>Ctrl+1</b> for single underline, <b>Ctrl+2</b> for double underline, <b>Ctrl+0</b> to remove. Spaces and Enter work normally.</div><div class="toolbar"><button data-t=" ">Space</button><button data-t=" | ">| Tala</button><button data-t=" || ">|| Double tala</button><button data-t="\n">↵ New line</button><button id="delete">⌫ Backspace</button></div><p class="hint">Type S R G M P D N directly in the composition, or use the buttons. Octave dots are drawn above or below the whole Kannada swara, not with Unicode combining marks. You may type text directly, but use the swara buttons for correctly positioned octave dots. For a duration, place the cursor after the swara or select the swara, then click a duration button.</p></section>
-<div class="work-main"><section class="panel"><h2 class="print-title" id="printHeading"></h2><div class="print-meta" id="printMeta"></div><div class="raga-picker no-print"><label for="ragaPreset"><strong>Raga library · ರಾಗ ಪಟ್ಟಿ</strong></label><input id="ragaSearch" type="search" placeholder="Search raga name or Melakarta number…" aria-label="Search ragas" style="flex:1;min-width:220px;padding:10px;border:1px solid #b7c5d6;border-radius:8px"><select id="ragaPreset"><option value="">Choose a raga to fill Aarohana / Avarohana</option></select><button type="button" id="fillRaga">Fill scales</button><p class="hint" id="ragaCount" aria-live="polite"></p><p class="hint" id="ragaInfo"></p><p class="hint">Search by raga name or Melakarta number, choose a result, and press Fill scales. This replaces the two scale lines, not your composition. You can still edit both lines manually. Subscript digits ₁ ₂ ₃ indicate swara variants.</p></div><div class="scale-row"><label for="arohana">ಆರೋಹಣ</label><div id="arohana" class="scale-input" contenteditable="true" spellcheck="false" role="textbox" aria-label="Arohana swaras">ಸ ಗ₃ ರಿ₂ ಮ₁ ಪ ನಿ₃ ಸ̇</div></div><div class="scale-row"><label for="avarohana">ಅವರೋಹಣ</label><div id="avarohana" class="scale-input" contenteditable="true" spellcheck="false" role="textbox" aria-label="Avarohana swaras">ಸ̇ ನಿ₃ ಪ ಮ₁ ಗ₃ ರಿ₂ ಸ</div></div><p class="hint no-print">Edit the Aarohana and Avarohana lines directly. These lines are included in saved projects and printed PDFs.</p><div id="editor" class="editor" contenteditable="true" spellcheck="false" aria-label="Carnatic swara notation editor" role="textbox" aria-multiline="true"><span class="sw" data-o="mid" data-n="ಪ" contenteditable="false">ಪ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಮ" contenteditable="false">ಮ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಗ" contenteditable="false">ಗ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ರಿ" contenteditable="false">ರಿ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಸ" contenteditable="false">ಸ<span class="dur"></span></span></div></section>
-<section class="panel no-print"><div class="label">Composition details</div><div class="meta"><label>Title <input id="name" value="Manavyala Kincaradate" aria-label="Project name"></label><label>Raga <input id="raga" value="Nalinakanti"></label><label>Tala <input id="tala" value="Adi / Deshadi"></label><label>Composer <input id="composer" value="Sri Tyagaraja"></label></div><div class="toolbar"><button id="save">Save Project (.json)</button><button id="open">Open Project</button><input type="file" id="file" accept=".json,application/json" hidden><button id="savehtml">Save standalone HTML</button><button id="print">Compact PDF / Print</button><button id="copy">Copy plain text</button><button id="clear">Clear</button></div><p class="hint">Save Project creates an editable JSON file. Use Open Project to continue later. The standalone HTML option saves a copy of this editor with your current notes embedded. PDFs are for printing, not re-editing. Plain text copy uses Unicode dots, which may not align perfectly in other applications.</p><div class="status" id="status" aria-live="polite"></div><div class="saved-at" id="savedAt"></div></section><section class="panel no-print help"><details><summary>Help · ಸ್ವರ ಸಂಕೇತಗಳ ಮಾರ್ಗದರ್ಶಿ</summary><p><strong>Octaves:</strong> Select ಕೆಳ ಸ್ಥಾಯಿ for a dot below (lower octave), ಮಧ್ಯ ಸ್ಥಾಯಿ for no dot, or ಮೇಲಿನ ಸ್ಥಾಯಿ for a dot above (upper octave), then click a swara.</p><p><strong>Lyrics:</strong> Click after a swara line and select Add lyrics below swaras. Lyrics can be typed in Kannada, Tamil, Telugu, or English, and are saved and printed. Switching notation language does not transliterate lyrics.</p><p><strong>Keyboard:</strong> In the composition editor, S R G M P D N (uppercase or lowercase) insert Kannada swaras. Other keys retain normal typing. Ctrl+1 / Ctrl+2 / Ctrl+0 apply single / double / no underline to a selected swara or the swara just before the cursor.</p><p><strong>Sections:</strong> Use the Pallavi, Anupallavi, or Charana buttons to insert Kannada section headings at the cursor. Headings are saved and printed.</p><p><strong>Underlines:</strong> Select a swara, or put the cursor immediately after it, then use Single underline, Double underline, or Remove underline. Underlines are retained in saved projects and printouts.</p><p><strong>Deergha:</strong> ಸ, adds one duration unit; ಸ; adds two; ಸ,, also adds two. Place the cursor immediately after a button-inserted swara before clicking the duration mark.</p><p><strong>Tala:</strong> Use | for a division and || for a double division. Space and New line buttons separate phrases.</p><p><strong>Automatic saving:</strong> Your edits are saved in this browser on this device. It is not cloud sync. Use Save Project to download a backup, and Open Project to resume on another computer. Browser storage can be cleared, so keep JSON backups.</p><p><strong>Raga scale:</strong> Select a raga from the library and click Fill scales, or type the Aarohana and Avarohana in their separate editable lines above the composition. Use Unicode subscripts ₁ ₂ ₃ for swara variants. Both are saved and printed.</p><p><strong>Printing:</strong> Use Compact PDF / Print and select “Save as PDF” in the print dialog. Turn OFF “Headers and footers” in Chrome’s More settings to hide the website URL, date, and page title. The title, raga, tala and composer appear above the swaras. Octave dots are drawn independently of Kannada font combining-mark support.</p><p><strong>Voice typing:</strong> Click Start voice typing, allow microphone access, speak short phrases, correct the transcript, and click Insert reviewed notes. Speak swara names in English (Sa, Ri, Ga, Ma, Pa, Da, Ni). Commands include upper/lower/middle octave, comma, semicolon, tala, double tala, and new line. Review the output for speech recognition errors. This feature may need internet and is not supported in all browsers.</p></details></section></div></div></main><script>
+</style><style>
+/* Version 17: horizontal, icon-led command menus replace the sidebar. */
+.work-layout{display:block!important}
+.work-main{width:100%;min-width:0}
+.top-commandbar{display:flex;align-items:center;flex-wrap:wrap;gap:7px;position:sticky;top:0;z-index:30;background:#fff;border:1px solid #d8e1ed;border-radius:12px;padding:9px;margin:10px 0;box-shadow:0 3px 12px #182b4017}
+.tool-menu{position:relative}
+.tool-menu>summary{list-style:none;cursor:pointer;user-select:none;display:flex;align-items:center;gap:6px;padding:8px 11px;border-radius:8px;border:1px solid #d7e0ed;background:#f7f9fc;font-size:14px;font-weight:650;white-space:nowrap}
+.tool-menu>summary::-webkit-details-marker{display:none}
+.tool-menu>summary:hover,.tool-menu[open]>summary{background:#e8f0ff;border-color:#9cbbe5}
+.menu-content{position:absolute;left:0;top:calc(100% + 5px);z-index:35;background:#fff;border:1px solid #bdcce0;border-radius:10px;box-shadow:0 12px 32px #15263c30;padding:14px;min-width:260px;max-width:min(440px,calc(100vw - 26px));max-height:65vh;overflow:auto}
+.menu-content .toolbar{margin:8px 0;gap:6px}
+.menu-content button.note{font-size:21px;min-width:45px}
+.menu-content .hint{font-size:12px}
+.tool-menu:nth-last-child(-n+3) .menu-content{left:auto;right:0}
+@media(max-width:760px){.top-commandbar{top:0;gap:5px;padding:6px;border-radius:0;margin:0 -16px 10px;flex-wrap:nowrap;overflow-x:auto;overflow-y:visible;scrollbar-width:thin}.tool-menu{position:static}.tool-menu>summary{padding:7px 9px;font-size:13px}.tool-menu>summary span{display:none}.menu-content{position:fixed;top:52px;left:8px!important;right:8px!important;min-width:0;max-width:none;max-height:65vh}.work-main{width:100%}}
+@media print{.top-commandbar{display:none!important}}
+</style></head><body><main><h1>Carnatic Swara Editor · ಸ್ವರ ಸಂಪಾದಕ</h1><div class="credit">Created by Shiva Subramanya</div><div class="free-note">Free for anyone to use · ಎಲ್ಲರಿಗೂ ಉಚಿತವಾಗಿ ಬಳಸಲು ಲಭ್ಯ</div><div class="sub">Multilingual Carnatic Swara Editor · Top icon menus · Aarohana / Avarohana · accurately positioned octave dots · deergha swaras · save and reopen projects</div>
+<div class="panel no-print" style="margin:12px 0"><label for="notationLanguage"><strong>Notation language / ಲಿಪಿ / எழுத்து / లిపి</strong></label> <select id="notationLanguage" style="padding:9px;border:1px solid #b7c5d6;border-radius:8px"><option value="kn">ಕನ್ನಡ · Kannada</option><option value="ta">தமிழ் · Tamil</option><option value="te">తెలుగు · Telugu</option><option value="en">English</option></select><span class="hint"> Switch scripts without changing the music. Lyrics and free text are not translated.</span></div><div class="work-layout"><nav class="top-commandbar no-print" aria-label="Editor tools">
+<details class="tool-menu"><summary title="Choose octave">◉ <span>Octave</span></summary><div class="menu-content"><div class="label">Octave / ಸ್ಥಾಯಿ</div><div class="toolbar" id="octaves"><button data-o="low">↓ Lower · dot below</button><button data-o="mid" class="active">● Middle</button><button data-o="high">↑ Upper · dot above</button></div></div></details>
+<details class="tool-menu"><summary title="Insert swara">♫ <span>Swaras</span></summary><div class="menu-content"><div class="label">Insert swara / ಸ್ವರ</div><div class="toolbar" id="notes"></div><p class="hint">Type S R G M P D N. For deergha, type Maa, Saa, Paa, Rii, Nee, etc. (double vowels).</p></div></details>
+<details class="tool-menu"><summary title="Swara duration">⏱ <span>Duration</span></summary><div class="menu-content"><div class="label">Deergha · applies to preceding swara</div><div class="toolbar"><button data-d=",">, +1</button><button data-d=";">; +2</button><button data-d=",,">,, +2</button><button id="custom">Custom…</button></div></div></details>
+<details class="tool-menu"><summary title="Lyrics and phonetic typing">✎ <span>Lyrics</span></summary><div class="menu-content"><div class="label">Lyrics / ಸಾಹಿತ್ಯ</div><div class="phonetic-tools"><label><input type="checkbox" id="phoneticOn" checked> <strong>English keyboard → Indian-script lyrics</strong></label><p class="hint">First click Add lyrics below swaras, then type in the highlighted lyrics line. Swara shortcuts are automatically disabled there. Press Space to convert each word. Use aa, ee, oo for long vowels; sh, ch, th, dh for consonants. Turn this off to type English lyrics.</p><button type="button" id="convertLyrics">Convert current lyrics line</button> <span id="phoneticStatus" class="hint" aria-live="polite"></span></div><div class="toolbar"><button type="button" id="insertLyrics">✍ Add lyrics below swaras</button></div><p class="hint">Place cursor after swaras, then add lyrics. Lyrics are preserved when switching notation languages.</p></div></details>
+<details class="tool-menu"><summary title="Song sections">☷ <span>Sections</span></summary><div class="menu-content"><div class="label">Song sections / ವಿಭಾಗಗಳು</div><div class="toolbar"><button type="button" data-section="pallavi">ಪಲ್ಲವಿ · Pallavi</button><button type="button" data-section="anupallavi">ಅನುಪಲ್ಲವಿ · Anupallavi</button><button type="button" data-section="charana">ಚರಣ · Charana</button></div></div></details>
+<details class="tool-menu"><summary title="Underline swaras">U̲ <span>Underline</span></summary><div class="menu-content"><div class="label">Underline / ರೇಖೆ</div><div class="toolbar"><button type="button" id="u1">Single underline</button><button type="button" id="u2">Double underline</button><button type="button" id="u0">Remove underline</button></div><p class="hint">Shortcuts: Ctrl+1, Ctrl+2, Ctrl+0</p></div></details>
+<details class="tool-menu"><summary title="Separators, new line, delete">⋮ <span>Insert</span></summary><div class="menu-content"><div class="toolbar"><button data-t=" ">Space</button><button data-t=" | ">| Tala</button><button data-t=" || ">|| Double tala</button><button data-t="\n">↵ New line</button><button id="delete">⌫ Backspace</button></div></div></details>
+<details class="tool-menu"><summary title="Keyboard help">ⓘ <span>Help</span></summary><div class="menu-content"><div class="keyboard-tip"><b>Keyboard:</b> Click in the composition and type <b>S R G M P D N</b> (lowercase also works). Choose octave in the top menu. Ctrl+1 = single underline, Ctrl+2 = double underline, Ctrl+0 = remove underline. Spaces and Enter work normally. Type Maa / Saa / Rii / Nee for deergha (double vowels).</div><p class="hint">Use swara buttons for correctly positioned octave dots. For duration, put cursor after the swara or select the swara, then choose a duration.</p></div></details>
+</nav><div class="work-main"><section class="panel"><h2 class="print-title" id="printHeading"></h2><div class="print-meta" id="printMeta"></div><div class="raga-picker no-print"><label for="ragaPreset"><strong>Raga library · ರಾಗ ಪಟ್ಟಿ</strong></label><input id="ragaSearch" type="search" placeholder="Search raga name or Melakarta number…" aria-label="Search ragas" style="flex:1;min-width:220px;padding:10px;border:1px solid #b7c5d6;border-radius:8px"><select id="ragaPreset"><option value="">Choose a raga — scales update automatically</option></select><button type="button" id="fillRaga">Refresh scales</button><p class="hint" id="ragaCount" aria-live="polite"></p><p class="hint" id="ragaInfo"></p><p class="hint">Search by raga name or Melakarta number, then choose a result. Both scales update automatically. This replaces the two scale lines, not your composition. You can still edit both lines manually. Subscript digits ₁ ₂ ₃ indicate swara variants.</p></div><div class="scale-row"><label for="arohana">ಆರೋಹಣ</label><div id="arohana" class="scale-input" contenteditable="true" spellcheck="false" role="textbox" aria-label="Arohana swaras">ಸ ಗ₃ ರಿ₂ ಮ₁ ಪ ನಿ₃ ಸ̇</div></div><div class="scale-row"><label for="avarohana">ಅವರೋಹಣ</label><div id="avarohana" class="scale-input" contenteditable="true" spellcheck="false" role="textbox" aria-label="Avarohana swaras">ಸ̇ ನಿ₃ ಪ ಮ₁ ಗ₃ ರಿ₂ ಸ</div></div><p class="hint no-print">Edit the Aarohana and Avarohana lines directly. These lines are included in saved projects and printed PDFs.</p><div id="editor" class="editor" contenteditable="true" spellcheck="false" aria-label="Carnatic swara notation editor" role="textbox" aria-multiline="true"><span class="sw" data-o="mid" data-n="ಪ" contenteditable="false">ಪ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಮ" contenteditable="false">ಮ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಗ" contenteditable="false">ಗ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ರಿ" contenteditable="false">ರಿ<span class="dur"></span></span> <span class="sw" data-o="mid" data-n="ಸ" contenteditable="false">ಸ<span class="dur"></span></span></div></section>
+<section class="panel no-print"><div class="label">Composition details</div><div class="meta"><label>Title <input id="name" value="Manavyala Kincaradate" aria-label="Project name"></label><label>Raga <input id="raga" value="Nalinakanti"></label><label>Tala <input id="tala" value="Adi / Deshadi"></label><label>Composer <input id="composer" value="Sri Tyagaraja"></label></div><div class="toolbar"><button id="save">Save Project (.json)</button><button id="open">Open Project</button><input type="file" id="file" accept=".json,application/json" hidden><button id="savehtml">Save standalone HTML</button><button id="print">Compact PDF / Print</button><button id="copy">Copy plain text</button><button id="clear">Clear</button></div><p class="hint">Save Project creates an editable JSON file. Use Open Project to continue later. The standalone HTML option saves a copy of this editor with your current notes embedded. PDFs are for printing, not re-editing. Plain text copy uses Unicode dots, which may not align perfectly in other applications.</p><div class="status" id="status" aria-live="polite"></div><div class="saved-at" id="savedAt"></div></section><section class="panel no-print help"><details><summary>Help · ಸ್ವರ ಸಂಕೇತಗಳ ಮಾರ್ಗದರ್ಶಿ</summary><p><strong>Octaves:</strong> Select ಕೆಳ ಸ್ಥಾಯಿ for a dot below (lower octave), ಮಧ್ಯ ಸ್ಥಾಯಿ for no dot, or ಮೇಲಿನ ಸ್ಥಾಯಿ for a dot above (upper octave), then click a swara.</p><p><strong>Lyrics:</strong> Click after a swara line and select Add lyrics below swaras. Click in the new lyrics line; swara shortcuts are disabled there. Press Space to convert English-keyboard words. Lyrics can be typed in Kannada, Tamil, Telugu, or English, and are saved and printed. Switching notation language does not transliterate lyrics.</p><p><strong>Keyboard:</strong> In SWARA lines only, S R G M P D N (uppercase or lowercase) insert swaras. In LYRICS lines, these shortcuts are disabled. Other keys retain normal typing. Ctrl+1 / Ctrl+2 / Ctrl+0 apply single / double / no underline to a selected swara or the swara just before the cursor.</p><p><strong>Sections:</strong> Use the Pallavi, Anupallavi, or Charana buttons to insert Kannada section headings at the cursor. Headings are saved and printed.</p><p><strong>Underlines:</strong> Select a swara, or put the cursor immediately after it, then use Single underline, Double underline, or Remove underline. Underlines are retained in saved projects and printouts.</p><p><strong>Phonetic deergha:</strong> Type <b>Maa</b> to insert ಮ, (or the selected script equivalent). Similarly Saa, Gaa, Paa, Daa, Rii and Nee. Three repeated vowels extend the note further. You can also use the Duration menu. </p><p><strong>Deergha:</strong> ಸ, adds one duration unit; ಸ; adds two; ಸ,, also adds two. Place the cursor immediately after a button-inserted swara before clicking the duration mark.</p><p><strong>Tala:</strong> Use | for a division and || for a double division. Space and New line buttons separate phrases.</p><p><strong>Automatic saving:</strong> Your edits are saved in this browser on this device. It is not cloud sync. Use Save Project to download a backup, and Open Project to resume on another computer. Browser storage can be cleared, so keep JSON backups.</p><p><strong>Raga scale:</strong> Select a raga from the library to automatically fill both scales, or type the Aarohana and Avarohana in their separate editable lines above the composition. Use Unicode subscripts ₁ ₂ ₃ for swara variants. Both are saved and printed.</p><p><strong>Printing:</strong> Use Compact PDF / Print and select “Save as PDF” in the print dialog. Turn OFF “Headers and footers” in Chrome’s More settings to hide the website URL, date, and page title. The title, raga, tala and composer appear above the swaras. Octave dots are drawn independently of Kannada font combining-mark support.</p></details></section></div></div></main><script>
 window.SWARA_LANG={
  kn:{S:'ಸ',R:'ರಿ',G:'ಗ',M:'ಮ',P:'ಪ',D:'ದ',N:'ನಿ',head:['ಪಲ್ಲವಿ','ಅನುಪಲ್ಲವಿ','ಚರಣ'],label:['ಆರೋಹಣ','ಅವರೋಹಣ']},
  ta:{S:'ஸ',R:'ரி',G:'க',M:'ம',P:'ப',D:'த',N:'நி',head:['பல்லவி','அனுபல்லவி','சரணம்'],label:['ஆரோஹணம்','அவரோஹணம்']},
@@ -77,182 +93,128 @@ window.convertScale=(text,lang)=>{
 };
 </script><script>
 (()=>{'use strict';const ed=document.getElementById('editor'),stat=document.getElementById('status');let oct='mid',savedRange=null;const notes=['ಸ','ರಿ','ಗ','ಮ','ಪ','ದ','ನಿ'];const keys=window.SWARA_KEYS;function currentGlyph(n){return window.swaraGlyph(window.swaraKey(n)||n)}function msg(s){stat.textContent=s}function inside(n){return n===ed||ed.contains(n)}function remember(){let s=getSelection();if(s.rangeCount&&inside(s.anchorNode))savedRange=s.getRangeAt(0).cloneRange()}['keyup','mouseup','input','focus'].forEach(e=>ed.addEventListener(e,remember));function range(){let s=getSelection();if(s.rangeCount&&inside(s.anchorNode))return s.getRangeAt(0).cloneRange();if(savedRange&&inside(savedRange.startContainer))return savedRange.cloneRange();let r=document.createRange();r.selectNodeContents(ed);r.collapse(false);return r}function place(r){r.collapse(true);let s=getSelection();s.removeAllRanges();s.addRange(r);savedRange=r.cloneRange();ed.focus()}function add(node){let r=range();r.deleteContents();r.insertNode(node);r.setStartAfter(node);place(r)}function textNode(t){add(document.createTextNode(t))}function insertLyrics(){
- let lyrics=document.createElement('div');lyrics.className='lyrics-line';lyrics.setAttribute('lang',window.swaraLanguage());lyrics.setAttribute('aria-label','Song lyrics');
+ let lyrics=document.createElement('div');lyrics.className='lyrics-line';lyrics.setAttribute('lang',window.swaraLanguage());lyrics.setAttribute('aria-label','Song lyrics');lyrics.setAttribute('contenteditable','true');lyrics.setAttribute('data-typing-mode','lyrics');
  // A line break separates the preceding swaras from the lyric line.
  let r=range();r.collapse(false);
  let br=document.createElement('br');r.insertNode(br);br.after(lyrics);
  let after=document.createElement('div');after.append(document.createElement('br'));lyrics.after(after);
  let target=document.createRange();target.selectNodeContents(lyrics);target.collapse(true);place(target);
- msg('Lyrics line inserted. Type the words below the swaras.');queueSave();
+ msg('LYRICS MODE — type English letters here; Space converts each word. Swara shortcuts are OFF in this line.');queueSave();
 }
 document.getElementById('insertLyrics').onclick=insertLyrics;
 function insertSection(kind){const labels={pallavi:'ಪಲ್ಲವಿ (Pallavi)',anupallavi:'ಅನುಪಲ್ಲವಿ (Anupallavi)',charana:'ಚರಣ (Charana)'};let r=range();r.collapse(false);let heading=document.createElement('div');heading.className='section-title';heading.dataset.section=kind;heading.contentEditable='false';heading.textContent=window.SWARA_LANG[window.swaraLanguage()].head[{pallavi:0,anupallavi:1,charana:2}[kind]]+' ('+kind.charAt(0).toUpperCase()+kind.slice(1)+')';let spacer=document.createElement('div');spacer.append(document.createElement('br'));r.insertNode(heading);heading.after(spacer);let next=document.createRange();next.selectNodeContents(spacer);next.collapse(true);place(next);queueSave();msg(labels[kind]+' inserted.');}document.querySelectorAll('[data-section]').forEach(b=>b.onclick=()=>insertSection(b.dataset.section));function note(n){let el=document.createElement('span');el.className='sw';el.dataset.o=oct;el.dataset.n=n;el.dataset.key=window.swaraKey(n)||n;el.contentEditable='false';el.append(document.createTextNode(currentGlyph(n)));let d=document.createElement('span');d.className='dur';el.append(d);add(el);textNode(' ')}notes.forEach(n=>{let b=document.createElement('button');b.className='note';b.textContent=currentGlyph(n);b.dataset.key=window.swaraKey(n);b.onclick=()=>note(n);document.getElementById('notes').append(b)});document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{oct=b.dataset.o;document.querySelectorAll('[data-o]').forEach(x=>x.classList.toggle('active',x===b))});function precedingSwara(){let r=range(),n=r.startContainer,o=r.startOffset;if(n.nodeType===3){let p=n.previousSibling;if(p&&p.nodeType===1&&p.classList.contains('sw'))return p;if(n.textContent.slice(0,o).trim()===''&&p&&p.nodeType===1&&p.classList.contains('sw'))return p}if(n.nodeType===1){let p=n.childNodes[o-1];if(p&&p.nodeType===1&&p.classList.contains('sw'))return p;if(p&&p.nodeType===3&&p.textContent.trim()===''&&p.previousSibling?.classList?.contains('sw'))return p.previousSibling}return null}function duration(t){let n=precedingSwara();if(n){n.querySelector('.dur').textContent+=t;msg('Duration added.')}else{msg('Place cursor just after a swara button-inserted note, then add duration.')}}document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>duration(b.dataset.d));document.getElementById('custom').onclick=()=>{let v=prompt('Additional duration units (1–16)','3');if(v===null)return;let n=Number(v);if(!Number.isInteger(n)||n<1||n>16)return msg('Enter a number from 1 to 16.');duration(';'.repeat(Math.floor(n/2))+(n%2?',':''))};document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>textNode(b.dataset.t==='\\n'?'\n':b.dataset.t));document.getElementById('delete').onclick=()=>{ed.focus();document.execCommand('delete');remember()};
-// Review-first speech transcription: do not silently discard unrecognized notes.
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-const voiceStart=document.getElementById('voiceStart'),voiceStop=document.getElementById('voiceStop'),voiceStatus=document.getElementById('voiceStatus');
-const voiceDraft=document.getElementById('voiceDraft'),voicePreview=document.getElementById('voicePreview');
-const voiceApply=document.getElementById('voiceApply'),voiceClear=document.getElementById('voiceClear');
-const voiceLocale=document.getElementById('voiceLocale'),voiceUnknown=document.getElementById('voiceUnknown');
-let recognition=null,voiceActive=false,voiceRestart=false,voiceSession=0;
-const voiceNotes={sa:'ಸ',saa:'ಸ',sar:'ಸ',sah:'ಸ',saw:'ಸ',so:'ಸ',sir:'ಸ',ri:'ರಿ',ree:'ರಿ',re:'ರಿ',ray:'ರಿ',rayy:'ರಿ',rhee:'ರಿ',reee:'ರಿ',ga:'ಗ',gaa:'ಗ',gah:'ಗ',guh:'ಗ',ma:'ಮ',maa:'ಮ',mah:'ಮ',pa:'ಪ',paa:'ಪ',pah:'ಪ',da:'ದ',dha:'ದ',daa:'ದ',dah:'ದ',the:'ದ',ni:'ನಿ',nee:'ನಿ',ne:'ನಿ',knee:'ನಿ',kni:'ನಿ'};
-const voicePhrases=[
- ['upper octave','high'],['higher octave','high'],['high octave','high'],['tara sthayi','high'],
- ['lower octave','low'],['low octave','low'],['mandra sthayi','low'],
- ['middle octave','mid'],['normal octave','mid'],['madhya sthayi','mid'],
- ['double tala','double'],['double bar','double'],['new line','newline'],['next line','newline'],
- ['anu pallavi','anupallavi'],['anupallavi','anupallavi'],
- ['pallavi','pallavi'],['charanam','charana'],['charana','charana'],
- ['semicolon','semicolon'],['semi colon','semicolon'],['comma','comma'],['tala','tala'],['bar','tala'],
- ['space','space'],['sa','ಸ'],['ri','ರಿ'],['ga','ಗ'],['ma','ಮ'],['pa','ಪ'],['da','ದ'],['ni','ನಿ']
-];
-function voiceOct(o){oct=o;document.querySelectorAll('#octaves [data-o]').forEach(b=>b.classList.toggle('active',b.dataset.o===o));}
-function voiceParse(raw){
- const tokens=raw.toLowerCase().replace(/[^a-z\s]/g,' ').trim().split(/\s+/).filter(Boolean);
- const parsed=[],unknown=[];
- for(let i=0;i<tokens.length;){
-  let matched=false;
-  for(const [phrase,action] of voicePhrases){
-   const parts=phrase.split(' ');
-   if(tokens.slice(i,i+parts.length).join(' ')===phrase){
-    parsed.push({action,source:phrase});i+=parts.length;matched=true;break;
-   }
-  }
-  if(matched)continue;
-  const w=tokens[i],n=voiceNotes[w];
-  if(n)parsed.push({action:n,source:w});
-  else{unknown.push(w);parsed.push({action:'?',source:w});}
-  i++;
- }
- return {parsed,unknown};
-}
-function voiceRefresh(){
- const {parsed,unknown}=voiceParse(voiceDraft.value);
- voicePreview.textContent=parsed.map(x=>x.action==='?'?'['+x.source+' ?]':
-  ({high:'↑',low:'↓',mid:'↔',newline:'↵',double:'||',tala:'|',comma:',',semicolon:';',space:'␣',pallavi:'[Pallavi]',anupallavi:'[Anupallavi]',charana:'[Charana]'})[x.action]||window.swaraGlyph(window.swaraKey(x.action)||x.action)).join(' ');
- voiceUnknown.textContent=unknown.length?'Not understood: '+unknown.join(', ')+'. Edit the transcript before inserting.':'All words recognized. Review the notation, then insert.';
- voiceApply.disabled=!parsed.length||!!unknown.length;
-}
-voiceDraft.addEventListener('input',voiceRefresh);
-voiceClear.onclick=()=>{voiceDraft.value='';voiceRefresh();voiceStatus.textContent='Transcript cleared.'};
-voiceApply.onclick=()=>{
- const {parsed,unknown}=voiceParse(voiceDraft.value);
- if(unknown.length){voiceStatus.textContent='Correct unknown words in the transcript first.';return;}
- for(const {action} of parsed){
-  if(action==='high'||action==='mid'||action==='low')voiceOct(action);
-  else if(action==='newline')textNode('\n');
-  else if(action==='double')textNode(' || ');
-  else if(action==='tala')textNode(' | ');
-  else if(action==='space')textNode(' ');
-  else if(action==='comma')duration(',');
-  else if(action==='semicolon')duration(';');
-  else if(['pallavi','anupallavi','charana'].includes(action))insertSection(action);
-  else note(action);
- }
- queueSave();voiceStatus.textContent='Inserted reviewed notation into composition.';
- voiceDraft.value='';voiceRefresh();
-};
-function voiceSetButtons(listening){voiceStart.disabled=listening||!SpeechRecognition;voiceStop.disabled=!listening;}
-if(!SpeechRecognition){voiceStart.disabled=true;voiceStatus.textContent='Speech recognition unavailable here. You can still type or paste a transcript below and insert it.'}
-else{
- recognition=new SpeechRecognition();recognition.lang=voiceLocale.value;recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=3;
- recognition.onresult=e=>{
-  let interim='';
-  for(let i=e.resultIndex;i<e.results.length;i++){
-   const result=e.results[i],transcript=result[0].transcript.trim();
-   if(result.isFinal){
-    voiceDraft.value+=(voiceDraft.value.trim()?' ':'')+transcript;
-    voiceRefresh();
-    voiceStatus.textContent='Heard: '+transcript+'. Review below before inserting.';
-   }else interim=transcript;
-  }
-  if(interim)voiceStatus.textContent='Listening: '+interim;
- };
- recognition.onerror=e=>{
-  voiceStatus.textContent='Speech recognition error: '+e.error+'. Check microphone permission or try a different recognition language.';
-  if(['not-allowed','service-not-allowed','audio-capture','network'].includes(e.error)){voiceRestart=false;voiceActive=false;voiceSetButtons(false);}
- };
- recognition.onend=()=>{
-  voiceSetButtons(false);
-  if(voiceActive&&voiceRestart){
-   try{recognition.start();voiceSetButtons(true)}catch(e){voiceActive=false;voiceStatus.textContent='Recognition stopped. Click Start to resume.'}
-  }else{voiceActive=false;if(voiceStatus.textContent.startsWith('Listening:'))voiceStatus.textContent='Stopped. Review transcript below.'}
- };
- voiceStart.onclick=()=>{
-  try{recognition.lang=voiceLocale.value;recognition.start();voiceActive=true;voiceRestart=true;voiceSetButtons(true);voiceStatus.textContent='Listening… Speak short phrases slowly. Review recognized words below.'}
-  catch(e){voiceStatus.textContent='Could not start microphone: '+e.message}
- };
- voiceStop.onclick=()=>{voiceRestart=false;voiceActive=false;recognition.stop();voiceSetButtons(false);voiceStatus.textContent='Stopped. Review and correct the transcript, then click Insert.'};
- voiceLocale.onchange=()=>{if(voiceActive){voiceRestart=false;voiceActive=false;recognition.stop();voiceSetButtons(false);voiceStatus.textContent='Language changed. Click Start again.'}};
-}
-voiceRefresh();
-// Phonetic transliteration for lyrics: Roman input -> selected Indian script.
+// Lyrics are a separate typing mode. Never let swara shortcuts process lyric keystrokes.
 const phoneticOn=document.getElementById('phoneticOn');
 const phoneticStatus=document.getElementById('phoneticStatus');
-const scriptMaps={
- kn:{v:['ಅ','ಆ','ಇ','ಈ','ಉ','ಊ','ಋ','ಎ','ಏ','ಐ','ಒ','ಓ','ಔ'],m:['','ಾ','ಿ','ೀ','ು','ೂ','ೃ','ೆ','ೇ','ೈ','ೊ','ೋ','ೌ'],h:'್',c:{k:'ಕ',kh:'ಖ',g:'ಗ',gh:'ಘ',ng:'ಙ',ch:'ಚ',chh:'ಛ',j:'ಜ',jh:'ಝ',ny:'ಞ',t:'ತ',th:'ಥ',d:'ದ',dh:'ಧ',n:'ನ',p:'ಪ',ph:'ಫ',b:'ಬ',bh:'ಭ',m:'ಮ',y:'ಯ',r:'ರ',l:'ಲ',v:'ವ',w:'ವ',sh:'ಶ',ss:'ಷ',s:'ಸ',h:'ಹ',f:'ಫ',z:'ಜ',tt:'ಟ',tth:'ಠ',dd:'ಡ',ddh:'ಢ',nn:'ಣ',ll:'ಳ',rr:'ಱ'}},
- ta:{v:['அ','ஆ','இ','ஈ','உ','ஊ','ரு','எ','ஏ','ஐ','ஒ','ஓ','ஔ'],m:['','ா','ி','ீ','ு','ூ','்ரு','ெ','ே','ை','ொ','ோ','ௌ'],h:'்',c:{k:'க',kh:'க',g:'க',gh:'க',ng:'ங',ch:'ச',chh:'ச',j:'ஜ',jh:'ஜ',ny:'ஞ',t:'த',th:'த',d:'த',dh:'த',n:'ந',p:'ப',ph:'ப',b:'ப',bh:'ப',m:'ம',y:'ய',r:'ர',l:'ல',v:'வ',w:'வ',sh:'ஷ',ss:'ஷ',s:'ஸ',h:'ஹ',f:'ஃப',z:'ஜ',tt:'ட',tth:'ட',dd:'ட',ddh:'ட',nn:'ண',ll:'ள',rr:'ற'}},
- te:{v:['అ','ఆ','ఇ','ఈ','ఉ','ఊ','ఋ','ఎ','ఏ','ఐ','ఒ','ఓ','ఔ'],m:['','ా','ి','ీ','ు','ూ','ృ','ె','ే','ై','ొ','ో','ౌ'],h:'్',c:{k:'క',kh:'ఖ',g:'గ',gh:'ఘ',ng:'ఙ',ch:'చ',chh:'ఛ',j:'జ',jh:'ఝ',ny:'ఞ',t:'త',th:'థ',d:'ద',dh:'ధ',n:'న',p:'ప',ph:'ఫ',b:'బ',bh:'భ',m:'మ',y:'య',r:'ర',l:'ల',v:'వ',w:'వ',sh:'శ',ss:'ష',s:'స',h:'హ',f:'ఫ',z:'జ',tt:'ట',tth:'ఠ',dd:'డ',ddh:'ఢ',nn:'ణ',ll:'ళ',rr:'ఱ'}}
+const scriptLetters={
+ kn:{v:['ಅ','ಆ','ಇ','ಈ','ಉ','ಊ','ಋ','ಎ','ಏ','ಐ','ಒ','ಓ','ಔ'],marks:['','ಾ','ಿ','ೀ','ು','ೂ','ೃ','ೆ','ೇ','ೈ','ೊ','ೋ','ೌ'],vir:'್',c:{k:'ಕ',kh:'ಖ',g:'ಗ',gh:'ಘ',ch:'ಚ',chh:'ಛ',j:'ಜ',jh:'ಝ',T:'ಟ',Th:'ಠ',D:'ಡ',Dh:'ಢ',N:'ಣ',t:'ತ',th:'ಥ',d:'ದ',dh:'ಧ',n:'ನ',p:'ಪ',ph:'ಫ',b:'ಬ',bh:'ಭ',m:'ಮ',y:'ಯ',r:'ರ',l:'ಲ',v:'ವ',w:'ವ',sh:'ಶ',Sh:'ಷ',s:'ಸ',h:'ಹ',L:'ಳ',f:'ಫ',z:'ಜ'}},
+ te:{v:['అ','ఆ','ఇ','ఈ','ఉ','ఊ','ఋ','ఎ','ఏ','ఐ','ఒ','ఓ','ఔ'],marks:['','ా','ి','ీ','ు','ూ','ృ','ె','ే','ై','ొ','ో','ౌ'],vir:'్',c:{k:'క',kh:'ఖ',g:'గ',gh:'ఘ',ch:'చ',chh:'ఛ',j:'జ',jh:'ఝ',T:'ట',Th:'ఠ',D:'డ',Dh:'ఢ',N:'ణ',t:'త',th:'థ',d:'ద',dh:'ధ',n:'న',p:'ప',ph:'ఫ',b:'బ',bh:'భ',m:'మ',y:'య',r:'ర',l:'ల',v:'వ',w:'వ',sh:'శ',Sh:'ష',s:'స',h:'హ',L:'ళ',f:'ఫ',z:'జ'}},
+ ta:{v:['அ','ஆ','இ','ஈ','உ','ஊ','ரு','எ','ஏ','ஐ','ஒ','ஓ','ஔ'],marks:['','ா','ி','ீ','ு','ூ','்ரு','ெ','ே','ை','ொ','ோ','ௌ'],vir:'்',c:{k:'க',kh:'க',g:'க',gh:'க',ch:'ச',chh:'ச',j:'ஜ',jh:'ஜ',T:'ட',Th:'ட',D:'ட',Dh:'ட',N:'ண',t:'த',th:'த',d:'த',dh:'த',n:'ந',p:'ப',ph:'ப',b:'ப',bh:'ப',m:'ம',y:'ய',r:'ர',l:'ல',v:'வ',w:'வ',sh:'ஷ',Sh:'ஷ',s:'ஸ',h:'ஹ',L:'ள',f:'ஃப',z:'ஜ'}}
 };
-const vowels=['a','aa','i','ii','u','uu','R','e','ee','ai','o','oo','au'];
-const vowelAliases={a:0,aa:1,i:2,ii:3,ee:8,ei:8,u:4,uu:5,oo:11,ri:6,e:7,ai:9,o:10,au:12};
-const consonantTokens=['tth','ddh','chh','kh','gh','ng','ch','jh','ny','th','dh','ph','bh','sh','ss','tt','dd','nn','ll','rr','k','g','j','t','d','n','p','b','m','y','r','l','v','w','s','h','f','z'];
-function phoneticWord(word,lang){
- const map=scriptMaps[lang];if(!map||!/[a-z]/i.test(word))return word;
- let out='',i=0,pending=false;const lower=word.toLowerCase();
- while(i<lower.length){
-  let c=consonantTokens.find(t=>lower.startsWith(t,i));
-  // vowel pairs take priority, except initial r+i (ri is a swara-like vowel when standalone)
-  let v=Object.keys(vowelAliases).sort((a,b)=>b.length-a.length).find(t=>lower.startsWith(t,i));
-  if(v && (!c || (pending && v.length>=c.length) || (!pending && v.length>c.length && !['ri'].includes(v)))){
-   const vi=vowelAliases[v];out+=pending?map.m[vi]:map.v[vi];pending=false;i+=v.length;continue;
+const romanVowels=[['aa',1],['ee',3],['ii',3],['oo',5],['uu',5],['ai',9],['au',12],['ou',12],['RRi',6],['ri',6],['a',0],['i',2],['u',4],['e',7],['E',8],['o',10],['O',11]];
+const romanConsonants=['chh','kh','gh','ch','jh','Th','Dh','th','dh','ph','bh','sh','Sh','ng','ny','k','g','j','T','D','N','t','d','n','p','b','m','y','r','l','v','w','s','h','L','f','z'];
+function transliterateWord(word,lang){
+ const abc=scriptLetters[lang];if(!abc)return word;
+ let out='',i=0;
+ while(i<word.length){
+  const remainder=word.slice(i);
+  if(remainder[0]==='M'&&remainder.length===1){out+=lang==='kn'?'ಂ':lang==='te'?'ం':'ம்';i++;continue;}
+  const consonant=romanConsonants.find(k=>remainder.startsWith(k));
+  if(consonant){
+   const glyph=abc.c[consonant]||abc.c.n;
+   i+=consonant.length;
+   const vowel=romanVowels.find(([k])=>word.slice(i).startsWith(k));
+   if(vowel){out+=glyph+abc.marks[vowel[1]];i+=vowel[0].length;}
+   else if(i===word.length || romanConsonants.some(k=>word.slice(i).startsWith(k)))out+=glyph+abc.vir;
+   else out+=glyph;
+   continue;
   }
-  if(c){if(pending)out+=map.h;out+=map.c[c];pending=true;i+=c.length;continue;}
-  if(v){const vi=vowelAliases[v];out+=pending?map.m[vi]:map.v[vi];pending=false;i+=v.length;continue;}
-  if(pending)pending=false;
-  out+=word[i];i++;
+  const vowel=romanVowels.find(([k])=>remainder.startsWith(k));
+  if(vowel){out+=abc.v[vowel[1]];i+=vowel[0].length;continue;}
+  out+=word[i++];
  }
  return out;
 }
-function convertRomanWords(text,lang){return text.replace(/[A-Za-z]+/g,w=>phoneticWord(w,lang));}
-function activeLyrics(){const sel=window.getSelection();const node=sel?.anchorNode;const el=node?.nodeType===1?node:node?.parentElement;return el?.closest?.('.lyrics-line')||null;}
-function convertBeforeCursor(lyric){
- const sel=window.getSelection();if(!sel||!sel.rangeCount)return false;
- const r=sel.getRangeAt(0);if(!r.collapsed||!lyric.contains(r.startContainer))return false;
- const node=r.startContainer;if(node.nodeType!==Node.TEXT_NODE)return false;
- const left=node.textContent.slice(0,r.startOffset),match=left.match(/([A-Za-z]+)$/);if(!match)return false;
- const word=match[1],converted=phoneticWord(word,window.swaraLanguage());
- if(converted===word)return false;
- const start=r.startOffset-word.length;
- node.replaceData(start,word.length,converted);
- const caret=document.createRange();caret.setStart(node,start+converted.length);caret.collapse(true);sel.removeAllRanges();sel.addRange(caret);
- return true;
+function convertLyricsText(text){
+ const lang=window.swaraLanguage();
+ if(lang==='en')return text;
+ return text.replace(/[A-Za-z]+/g,w=>transliterateWord(w,lang));
+}
+function activeLyrics(){const sel=getSelection();return sel?.anchorNode?.nodeType===1?sel.anchorNode.closest('.lyrics-line'):sel?.anchorNode?.parentElement?.closest('.lyrics-line')}
+function convertCurrentWord(){
+ const lyric=activeLyrics();if(!lyric)return false;
+ const sel=getSelection();if(!sel.rangeCount||!sel.isCollapsed)return false;
+ const r=sel.getRangeAt(0),node=r.startContainer;
+ if(node.nodeType!==3)return false;
+ const before=node.textContent.slice(0,r.startOffset),match=before.match(/([A-Za-z]+)$/);
+ if(!match)return false;
+ const original=match[1],converted=convertLyricsText(original);
+ if(converted===original)return false;
+ const start=r.startOffset-original.length;
+ node.replaceData(start,original.length,converted);
+ const next=document.createRange();next.setStart(node,start+converted.length);next.collapse(true);sel.removeAllRanges();sel.addRange(next);savedRange=next.cloneRange();queueSave();return true;
 }
 ed.addEventListener('keydown',e=>{
- const lyric=e.target.closest?.('.lyrics-line');
- if(!lyric||!phoneticOn.checked||window.swaraLanguage()==='en'||e.isComposing||e.ctrlKey||e.altKey||e.metaKey)return;
- if(e.key===' '||e.key==='Enter'||e.key==='Tab'||['.',',',';','!', '?'].includes(e.key)){
-  if(convertBeforeCursor(lyric)){phoneticStatus.textContent='Converted to '+document.getElementById('notationLanguage').selectedOptions[0].textContent+'.';queueSave();}
+ const lyric=e.target.closest?.('.lyrics-line')||activeLyrics();
+ if(!lyric)return;
+ if(e.isComposing||e.ctrlKey||e.metaKey||e.altKey)return;
+ if(phoneticOn.checked&&window.swaraLanguage()!=='en'&&(e.key===' '||e.key==='Enter'||e.key==='Tab')){
+  convertCurrentWord();
  }
 },true);
+ed.addEventListener('focusin',e=>{
+ if(e.target.closest?.('.lyrics-line')){
+  phoneticStatus.textContent='Lyrics mode active — swara shortcuts disabled.';
+  msg('LYRICS MODE: Type words here. Space converts phonetic English to '+window.swaraLanguage()+'.');
+ }
+});
 document.getElementById('convertLyrics').onclick=()=>{
  const lyric=activeLyrics()||ed.querySelector('.lyrics-line:last-of-type');
- if(!lyric){phoneticStatus.textContent='First add a lyrics line.';return;}
- const lang=window.swaraLanguage();if(lang==='en'){phoneticStatus.textContent='Choose Kannada, Tamil, or Telugu first.';return;}
- const walker=document.createTreeWalker(lyric,NodeFilter.SHOW_TEXT);let n,changed=0;
- while(n=walker.nextNode()){const next=convertRomanWords(n.textContent,lang);if(next!==n.textContent){n.textContent=next;changed++;}}
- phoneticStatus.textContent=changed?'Converted lyrics line.':'No Roman letters found.';queueSave();
+ if(!lyric){msg('First click Add lyrics below swaras, then type in the lyrics line.');return;}
+ const walker=document.createTreeWalker(lyric,NodeFilter.SHOW_TEXT);let n;while((n=walker.nextNode()))n.textContent=convertLyricsText(n.textContent);
+ queueSave();msg('Lyrics converted to '+window.swaraLanguage()+'.');
 };
 // Direct Latin-key transliteration, restricted to the composition editor.
 const latinNotes={s:'ಸ',r:'ರಿ',g:'ಗ',m:'ಮ',p:'ಪ',d:'ದ',n:'ನಿ'};
+// Phonetic deergha: Maa, Saa, Rii, Gee, Paa, Daa, Nee etc.
+// A doubled vowel immediately following a keyboard-inserted swara adds one
+// duration unit; a third vowel adds another. The note itself remains editable.
+let phoneticLast=null,phoneticVowels=0;
+const phoneticVowel={s:'a',r:'i',g:'a',m:'a',p:'a',d:'a',n:'i'};
+
 ed.addEventListener('keydown',e=>{
- if(e.target.closest?.('.lyrics-line'))return;
+ if(e.target.closest?.('.lyrics-line') || getSelection()?.anchorNode?.parentElement?.closest('.lyrics-line'))return;
  if(e.isComposing||e.altKey||e.metaKey)return;
  if(e.ctrlKey){
    if(['1','2','0'].includes(e.key)){e.preventDefault();applyUnderline(e.key==='1'?1:e.key==='2'?2:0)}
    return;
  }
- const n=latinNotes[e.key.toLowerCase()];
- if(n&&e.key.length===1){e.preventDefault();note(n);queueSave()}
+ const key=e.key.toLowerCase();
+ const n=latinNotes[key];
+ if(n&&e.key.length===1){
+   e.preventDefault();note(n);
+   phoneticLast={sw:precedingSwara(),vowel:phoneticVowel[key]};
+   phoneticVowels=0;queueSave();return;
+ }
+ // 'Maa' is typed M + a + a. Each 'a' adds a duration unit;
+ // 'Rii'/'Nee' work similarly with i. An optional first vowel is
+ // swallowed so the familiar spelling Maa/rii does not create extra text.
+ if(phoneticLast&&e.key.length===1&&!e.repeat&&
+    (key==='a'||key==='i'||key==='e')&&
+    precedingSwara()===phoneticLast.sw){
+   const vowel=phoneticLast.vowel;
+   if(key===vowel||(vowel==='i'&&key==='e')){
+     e.preventDefault();phoneticVowels++;
+     // Maa: first 'a' completes 'Ma'; second 'a' is deergha.
+     // The user may also enter Ma followed by 'aa'.
+     if(phoneticVowels>=2){
+       phoneticLast.sw.querySelector('.dur').textContent+=',';
+       queueSave();
+     }
+     return;
+   }
+ }
+ phoneticLast=null;phoneticVowels=0;
 });
 function targetSwara(){
  const r=range();
@@ -308,16 +270,28 @@ function show(q=''){
  document.getElementById('ragaCount').textContent=(sel.options.length-1)+' matching ragas · '+library.length+' total';
 }
 search.addEventListener('input',()=>show(search.value));
-sel.addEventListener('change',()=>{const x=library.find(r=>r.name===sel.value);if(x)document.getElementById('ragaInfo').textContent=x.kind+(x.number?' · Melakarta '+x.number:'')+' · Scales are reference forms; check teacher-specific variants.'});
-document.getElementById('fillRaga').addEventListener('click',()=>{
- const x=library.find(r=>r.name===sel.value);if(!x)return;
- const existing=raga.value.trim();
- if(existing&&existing.toLowerCase()!==x.name.toLowerCase()&&!confirm('Replace the current raga name and both scale lines?'))return;
+function applySelectedRaga(){
+ const x=library.find(entry=>entry.name===sel.value);
+ if(!x)return;
  raga.value=x.name;
  document.getElementById('arohana').textContent=window.convertScale(kannada(x.up),window.swaraLanguage());
  document.getElementById('avarohana').textContent=window.convertScale(kannada(x.down,true),window.swaraLanguage());
+ document.getElementById('ragaInfo').textContent=x.kind+(x.number?' · Melakarta '+x.number:'')+' · Aarohana and Avarohana updated. Reference scales may vary by tradition.';
  for(const id of ['raga','arohana','avarohana'])document.getElementById(id).dispatchEvent(new Event('input',{bubbles:true}));
-});
+}
+sel.addEventListener('change',applySelectedRaga);
+document.getElementById('fillRaga').addEventListener('click',applySelectedRaga);
 show();
+})();
+</script><script>
+(function(){
+const menus=[...document.querySelectorAll('.tool-menu')];
+menus.forEach(menu=>menu.addEventListener('toggle',()=>{if(menu.open)menus.forEach(other=>{if(other!==menu)other.open=false})}));
+document.addEventListener('click',e=>{
+ const clicked=e.target.closest('.tool-menu');
+ if(!clicked){menus.forEach(m=>m.open=false);return;}
+ if(e.target.closest('button')&&!e.target.closest('#phoneticOn')&&!e.target.closest('#convertLyrics')) clicked.open=false;
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')menus.forEach(m=>m.open=false)});
 })();
 </script></body></html>
